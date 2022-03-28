@@ -1,0 +1,45 @@
+DP questions
+ques-Maximum Sum of Non-Adjacent Elements
+
+/******************************************************************************
+
+                              Online C++ Compiler.
+               Code, Compile, Run and Debug C++ program online.
+Write your code in this editor and press "Run" button to compile and execute it.
+
+*******************************************************************************/
+
+#include <bits/stdc++.h>
+
+using namespace std;
+
+int sum(int a[],int indx,int dp[]){
+   
+    if(indx==0) return a[indx];
+    if(indx<0) return 0;
+     if(dp[indx]!=-1){
+        return dp[indx];
+    }
+    
+    int pick=a[indx]+sum(a,indx-2,dp);
+    int npick=0+sum(a,indx-1,dp);
+    return dp[indx]=max(pick,npick);
+}
+
+
+int main()
+{
+    int n;
+    cin>>n;
+    
+    int arr[n];
+    int dp[n];
+    for(int i=0;i<n;i++){
+        dp[i]=-1;
+    }
+    for(int i=0;i<n;i++){
+        cin>>arr[i];
+    }
+    cout<<sum(arr,n-1,dp);
+    return 0;
+}
